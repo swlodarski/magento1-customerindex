@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <SUMOHeavy_CustomerGrid>
+            <version>0.1.0</version>
+        </SUMOHeavy_CustomerGrid>
+    </modules>
+
+    <global>
+        <helpers>
+            <sumoheavy_customergrid>
+                <class>SUMOHeavy_CustomerGrid_Helper</class>
+            </sumoheavy_customergrid>
+        </helpers>
+
+        <models>
+            <sumoheavy_customergrid>
+                <class>SUMOHeavy_CustomerGrid_Model</class>
+                <resourceModel>sumoheavy_customergrid_resource</resourceModel>
+            </sumoheavy_customergrid>
+
+            <sumoheavy_customergrid_resource>
+                <class>SUMOHeavy_CustomerGrid_Model_Resource</class>
+                <entities>
+                    <customer_entity_grid>
+                        <table>sumoheavy_customer_entity_grid</table>
+                    </customer_entity_grid>
+                </entities>
+            </sumoheavy_customergrid_resource>
+        </models>
+
+        <resources>
+            <sumoheavy_customergrid_setup>
+                <setup>
+                    <module>SUMOHeavy_CustomerGrid</module>
+                </setup>
+            </sumoheavy_customergrid_setup>
+        </resources>
+
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <customer_grid>SUMOHeavy_CustomerGrid_Block_Adminhtml_Customer_Grid</customer_grid>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+
+        <index>
+            <indexer>
+                <sumoheavy_customer_entity_grid>
+                    <model>sumoheavy_customergrid/customer_entity_grid_indexer</model>
+                </sumoheavy_customer_entity_grid>
+            </indexer>
+        </index>
+
+        <events>
+            <customer_save_commit_after>
+                <observers>
+                    <sumoheavy_customergrid_customer_save_commit_after>
+                        <type>singleton</type>
+                        <class>sumoheavy_customergrid/observer</class>
+                        <method>onCustomerSaveCommitAfter</method>
+                    </sumoheavy_customergrid_customer_save_commit_after>
+                </observers>
+            </customer_save_commit_after>
+
+            <customer_address_save_commit_after>
+                <observers>
+                    <sumoheavy_customergrid_customer_address_save_commit_after>
+                        <type>singleton</type>
+                        <class>sumoheavy_customergrid/observer</class>
+                        <method>onCustomerAddressSaveCommitAfter</method>
+                    </sumoheavy_customergrid_customer_address_save_commit_after>
+                </observers>
+            </customer_address_save_commit_after>
+
+            <customer_address_delete_commit_after>
+                <observers>
+                    <sumoheavy_customergrid_customer_address_delete_commit_after>
+                        <type>singleton</type>
+                        <class>sumoheavy_customergrid/observer</class>
+                        <method>onCustomerAddressDeleteCommitAfter</method>
+                    </sumoheavy_customergrid_customer_address_delete_commit_after>
+                </observers>
+            </customer_address_delete_commit_after>
+        </events>
+    </global>
+</config>
