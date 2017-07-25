@@ -1,0 +1,39 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: notnoopci/php:5.6-browsers
+      - image: mysql:5.7
+        environment:
+          - MYSQL_ROOT_PASSWORD=magento
+          - MYSQL_USER=magento
+          - MYSQL_PASSWORD=magento
+          - MYSQL_DATABASE=magento_test
+    working_directory: ~/magento
+    environment:
+      - TZ: "/usr/share/zoneinfo/America/New_York"
+    steps:
+      - run:
+          name: Install mcrypt
+          command: sudo apt-get install libmcrypt-dev libreadline-dev
+      - run:
+          name: Install PHP extensions
+          command: sudo docker-php-ext-install pdo_mysql mcrypt
+      - checkout
+      - run:
+          name: Install Magento
+          command: .circleci/commands/magento-install.sh
+      - run:
+          name: Sync build dir
+          command: mkdir ~/magento/build && rsync -a ~/magento/source/ ~/magento/build
+      - run:
+          name: Setup tests
+          command: .circleci/commands/setup-tests.sh
+      - run:
+          name: Run tests
+          command: cd ~/magento/build && php ~/magento/build/vendor/bin/phpunit --coverage-html "/tmp/artifacts/phpunit/coverage/" --log-junit "/tmp/test-results/phpunit/junit.xml"
+      - store_artifacts:
+          path: /tmp/artifacts
+      - store_test_results:
+          path: /tmp/test-results

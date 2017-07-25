@@ -1,0 +1,10 @@
+# Editors
+.idea/
+.settings/
+.project
+.buildpath
+atlassian-ide-plugin.xml
+
+# Operating System
+.DS_Store
+Thumbs.db
