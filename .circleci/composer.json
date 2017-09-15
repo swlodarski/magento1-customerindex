@@ -1,5 +1,5 @@
 {
-    "name": "olark/test-olark-magento-1",
+    "name": "sumoheavy/magento1-customerindex",
     "require": {
         "magento-hackathon/magento-composer-installer": "^3"
     },

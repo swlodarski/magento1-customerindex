@@ -11,7 +11,7 @@ composer --global --no-interaction config repositories.firegento composer https:
 composer --no-interaction --prefer-source update
 
 echo 'Removing base url from database'
-mysql --user magento --password magento -e 'DELETE FROM core_config_data WHERE path LIKE "web/%secure/base_url"\g' magento_test
+mysql --user magento --password magento -e 'DELETE FROM core_config_data WHERE path LIKE "web/%secure/base_url"\g' circle_test
 
 echo 'Configuring Magento for testing'
 cp "$repo"/.circleci/local.xml.phpunit app/etc/

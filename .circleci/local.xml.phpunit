@@ -5,7 +5,7 @@
         <resources>
             <default_setup>
                 <connection>
-                    <dbname>magento_test</dbname>
+                    <dbname>circle_test</dbname>
                 </connection>
             </default_setup>
         </resources>

@@ -3,24 +3,21 @@ version: 2
 jobs:
   build:
     docker:
-      - image: notnoopci/php:5.6-browsers
+      - image: sumoheavy/magento1-circeci:latest
       - image: mysql:5.7
         environment:
-          - MYSQL_ROOT_PASSWORD=magento
-          - MYSQL_USER=magento
-          - MYSQL_PASSWORD=magento
-          - MYSQL_DATABASE=magento_test
+          - MYSQL_ALLOW_EMPTY_PASSWORD=true
+          - MYSQL_USER=ubuntu
+          - MYSQL_PASSWORD=ubuntu
+          - MYSQL_DATABASE=circle_test
     working_directory: ~/magento
     environment:
       - TZ: "/usr/share/zoneinfo/America/New_York"
     steps:
-      - run:
-          name: Install mcrypt
-          command: sudo apt-get install libmcrypt-dev libreadline-dev
-      - run:
-          name: Install PHP extensions
-          command: sudo docker-php-ext-install pdo_mysql mcrypt
       - checkout
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
           name: Install Magento
           command: .circleci/commands/magento-install.sh

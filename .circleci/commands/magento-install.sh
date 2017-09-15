@@ -19,9 +19,9 @@ php install.php \
     --admin_password testing123 \
     --admin_username admin \
     --db_host 127.0.0.1 \
-    --db_name magento_test \
-    --db_pass magento \
-    --db_user magento \
+    --db_name circle_test \
+    --db_pass ubuntu \
+    --db_user ubuntu \
     --default_currency USD \
     --license_agreement_accepted yes \
     --locale en_US \
