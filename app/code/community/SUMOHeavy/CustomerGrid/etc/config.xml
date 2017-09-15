@@ -85,4 +85,12 @@
             </customer_address_delete_commit_after>
         </events>
     </global>
+
+    <phpunit>
+        <suite>
+            <modules>
+                <SUMOHeavy_CustomerGrid />
+            </modules>
+        </suite>
+    </phpunit>
 </config>
